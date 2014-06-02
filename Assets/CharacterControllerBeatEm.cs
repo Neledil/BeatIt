@@ -3,30 +3,38 @@ using System.Collections;
 
 public class CharacterControllerBeatEm : MonoBehaviour {
 
-	public GameObject gameobject;
-	public Animation walkLeftAnim;
+
+	private Animator anim;
 
 	// Use this for initialization
 	void Start () {
-
+		anim = this.GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
 		if (Input.GetKey(KeyCode.DownArrow)){
-			gameobject.transform.Translate(new Vector3(0.0f, -0.01f));
+			this.transform.Translate(new Vector3(0.0f, -0.01f));
+			//anim.SetInteger("Direction", 1);
 		}
 		if (Input.GetKey(KeyCode.UpArrow)){
-			gameobject.transform.Translate(new Vector3(0.0f, 0.01f));
+			this.transform.Translate(new Vector3(0.0f, 0.01f));
+			//anim.SetInteger("Direction", 1);
 		}
 		if (Input.GetKey(KeyCode.LeftArrow)){
-			gameobject.transform.Translate(new Vector3(-0.01f, 0.0f));
-			walkLeftAnim.Play("playerWalkLeft2",PlayMode.StopAll);
+			this.transform.Translate(new Vector3(-0.01f, 0.0f));
+			anim.SetInteger("Direction", 1);
 		}
 		if (Input.GetKey(KeyCode.RightArrow)){
-			gameobject.transform.Translate(new Vector3(0.01f, 0.0f));
-
+			this.transform.Translate(new Vector3(0.01f, 0.0f));
+			anim.SetInteger("Direction", 2);
+		}
+		if (Input.GetKeyUp (KeyCode.LeftArrow)){
+			anim.SetInteger("Direction", 0);
+		}
+		if (Input.GetKeyUp (KeyCode.RightArrow)){
+			anim.SetInteger("Direction", 0);
 		}
 
 	}
